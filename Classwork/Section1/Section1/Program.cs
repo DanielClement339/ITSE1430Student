@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * ITSE 1430
+ * Daniel Clement
+ */
+using System;
 
 namespace Section1
 {
@@ -146,23 +146,71 @@ namespace Section1
         private static void AddMovie()
         {
             name = ReadString("Enter a name: ", true);
-            description = ReadString("Enter a description: ", true);
+            description = ReadString("Enter a description: ");
             runLength = ReadInt32("Enter run length(in minutes): ", 0);
         }
 
         private static void EditMovie()
         {
-            Console.WriteLine("EditMovie");
+            ViewMovies();
+
+            var newName = ReadString("Enter a name(or press enter for default): ", false);
+            if (!String.IsNullOrEmpty(newName))
+                name = newName;
+
+            var newDescription = ReadString("Enter a description(or press enter for default): ", false);
+            if (!String.IsNullOrEmpty(newDescription))
+                description = newDescription;
+
+            var newRunLength = ReadInt32("Enter run length(in minutes): ", 0);
+            if (newRunLength > 0)
+                runLength = newRunLength;
         }
 
         private static void DeleteMovie()
         {
-            Console.WriteLine("DeleteMovie");
+
+            if(Confirm("Are You sure you want to delete this movie?"))
+            {
+                //"Delete" the movie
+                name = null;
+                description = null;
+                runLength = 0;
+            };
+        }
+
+        private static bool Confirm( string message )
+        {
+            Console.WriteLine($"{message} (Y/N)");
+            do
+            {
+                ConsoleKeyInfo key = Console.ReadKey(true);
+
+                switch (key.KeyChar)
+                {
+                    case 'y':
+                    case 'Y':
+                    return true;
+                    case 'n':
+                    case 'N':
+                    return false;
+                }
+            } while (true);
         }
 
         private static void ViewMovies()
         {
-            Console.WriteLine("ViewMovies");
+            if(String.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("No movies available");
+                return;
+            }
+
+            Console.WriteLine(name);
+            if (!String.IsNullOrEmpty(description))
+                Console.WriteLine(description);
+            
+            Console.WriteLine($"The run length is {runLength} mins");
         }
 
         //helper functions
@@ -171,9 +219,9 @@ namespace Section1
             while (true)
             {
                 Console.WriteLine(message);
-                string input = Console.ReadLine();
+                var input = Console.ReadLine();
 
-                if (Int32.TryParse(input, out int result))
+                if (Int32.TryParse(input, out var result))//can use out var instead of out int
                 {
                     if (result >= minValue)
                     {
@@ -211,8 +259,6 @@ namespace Section1
         static string name;
         static string description;
         static int runLength;
-        static DateTime releaseDate;
-
-
+        //static DateTime releaseDate;
     }
 }
