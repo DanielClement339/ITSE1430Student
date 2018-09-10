@@ -55,14 +55,13 @@ namespace PizzaCreator
             GetPizzaCheese();
             GetPizzaDelivery();
             DisplayOrder();
-            DisplayMenu();
         }
 
         private static bool GetPizzaSize()
         {
            while(true)
             {
-                Console.WriteLine("Please choose one of the following");
+                Console.WriteLine("Please choose one of the following pizza sizes");
                 Console.WriteLine("1) Small($5)");
                 Console.WriteLine("2) Medium($6.25)");
                 Console.WriteLine("3) Large($8.75)");
@@ -360,7 +359,7 @@ namespace PizzaCreator
         {
             while (true)
             {
-                Console.WriteLine("Please choose one of the following");
+                Console.WriteLine("Please choose one of the following pizza sauces");
                 Console.WriteLine("1) Traditional($0)");
                 Console.WriteLine("2) Garlic($1)");
                 Console.WriteLine("3) Oregano($1)");
@@ -397,7 +396,7 @@ namespace PizzaCreator
         {
             while (true)
             {
-                Console.WriteLine("Please choose one of the following");
+                Console.WriteLine("Please choose either the regular amount of cheese or extra cheese");
                 Console.WriteLine("1) Regular($0)");
                 Console.WriteLine("2) Extra($1.25)");
 
@@ -426,7 +425,7 @@ namespace PizzaCreator
         {
             while (true)
             {
-                Console.WriteLine("Please choose one of the following");
+                Console.WriteLine("Please choose between take out or delivery");
                 Console.WriteLine("1) Take Out($0)");
                 Console.WriteLine("2) Delivery($2.50)");
 
@@ -465,7 +464,7 @@ namespace PizzaCreator
         {
             if(String.IsNullOrEmpty(pizzaSize))
             {
-                Console.WriteLine("You have not made an order to Display yet yet. press enter to continue");
+                Console.WriteLine("You have not made an order to Display yet yet.\nPress enter to continue");
                 Console.ReadLine();
                 DisplayMenu();
             }
@@ -493,9 +492,10 @@ namespace PizzaCreator
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Total               ${totalPrice}");
 
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
             DisplayMenu();
         }
-
         static decimal totalPrice = 0.00m;
         static string pizzaSize;
         static decimal sizePrice = 0.00m;
