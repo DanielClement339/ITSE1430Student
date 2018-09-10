@@ -23,6 +23,7 @@ namespace PizzaCreator
         {
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("1) New Order");
                 Console.WriteLine("2) Modify Order");
                 Console.WriteLine("3) Display Order");
@@ -40,13 +41,14 @@ namespace PizzaCreator
 
                     case '4': return false;                                 //quit the program
 
-                    default: Console.WriteLine($"{input} is not a valid value.\nPlease enter a valid Value."); break;
+                    default: Console.WriteLine($"Please enter a valid Value."); break;
                 };
             }
         }
 
         private static void NewOrder()
         {
+            Console.Clear();
             Console.WriteLine("New Order");
             GetPizzaSize();
             GetPizzaMeats();
@@ -54,13 +56,14 @@ namespace PizzaCreator
             GetPizzaSauce();
             GetPizzaCheese();
             GetPizzaDelivery();
-            DisplayOrder();
+            DisplayMenu();
         }
 
         private static bool GetPizzaSize()
         {
            while(true)
             {
+                Console.Clear();
                 Console.WriteLine("Please choose one of the following pizza sizes");
                 Console.WriteLine("1) Small($5)");
                 Console.WriteLine("2) Medium($6.25)");
@@ -105,6 +108,7 @@ namespace PizzaCreator
 
             while(true)
             {
+                Console.Clear();
                 Console.WriteLine("Select as many of the meats as you want to add on\nEach option is $0.75 Extra");
                 //bacon
                 if (!baconSelected)
@@ -222,7 +226,8 @@ namespace PizzaCreator
                                 }
                             }
                             return true;
-                        } 
+                        }
+                    default: Console.WriteLine($"Please enter a valid Value."); break;
                 }
             }
         }
@@ -237,6 +242,7 @@ namespace PizzaCreator
 
             while(true)
             {
+                Console.Clear();
                 Console.WriteLine("Select as many of the veggies as you want to add on\nEach option is $0.50 Extra");
                 if(!oliveSelected)
                     Console.WriteLine("1) Black Olives");
@@ -350,6 +356,7 @@ namespace PizzaCreator
                             }
                             return true;
                         }
+                    default: Console.WriteLine($"Please enter a valid Value."); break;
                 }
 
             }
@@ -359,6 +366,7 @@ namespace PizzaCreator
         {
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("Please choose one of the following pizza sauces");
                 Console.WriteLine("1) Traditional($0)");
                 Console.WriteLine("2) Garlic($1)");
@@ -396,6 +404,7 @@ namespace PizzaCreator
         {
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("Please choose either the regular amount of cheese or extra cheese");
                 Console.WriteLine("1) Regular($0)");
                 Console.WriteLine("2) Extra($1.25)");
@@ -425,6 +434,7 @@ namespace PizzaCreator
         {
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("Please choose between take out or delivery");
                 Console.WriteLine("1) Take Out($0)");
                 Console.WriteLine("2) Delivery($2.50)");
@@ -450,7 +460,8 @@ namespace PizzaCreator
         }
 
         private static void ModifyOrder()
-        {       
+        {
+            Console.Clear();
             Console.WriteLine("Modify Order");
             if (String.IsNullOrEmpty(pizzaSize))
             {
@@ -462,7 +473,8 @@ namespace PizzaCreator
 
         private static void DisplayOrder()
         {
-            if(String.IsNullOrEmpty(pizzaSize))
+            Console.Clear();
+            if (String.IsNullOrEmpty(pizzaSize))
             {
                 Console.WriteLine("You have not made an order to Display yet yet.\nPress enter to continue");
                 Console.ReadLine();
@@ -471,20 +483,26 @@ namespace PizzaCreator
             Console.WriteLine("Your Order is:");
             Console.WriteLine($"{pizzaSize}         ${sizePrice}");
             Console.WriteLine($"{delivery}          ${deliveryPrice}");
-            Console.WriteLine("Meats - $0.75 for each one");
-            foreach (string meat in meats)
+            if (!String.IsNullOrEmpty(meats[0]))
             {
-                if (!String.IsNullOrEmpty(meat))
+                Console.WriteLine("Meats - $0.75 for each one");
+                foreach (string meat in meats)
                 {
-                    Console.WriteLine($"   {meat}");
+                    if (!String.IsNullOrEmpty(meat))
+                    {
+                        Console.WriteLine($"   {meat}");
+                    }
                 }
             }
-            Console.WriteLine("Vegtables - $0.50 for each one");
-            foreach (string veggie in vegtables)
+            if (!String.IsNullOrEmpty(vegtables[0]))
             {
-                if (!String.IsNullOrEmpty(veggie))
+                Console.WriteLine("Vegtables - $0.50 for each one");
+                foreach (string veggie in vegtables)
                 {
-                    Console.WriteLine($"   {veggie}");
+                    if (!String.IsNullOrEmpty(veggie))
+                    {
+                        Console.WriteLine($"   {veggie}");
+                    }
                 }
             }
             Console.WriteLine($"{cheese} cheese     ${cheesePrice}");
