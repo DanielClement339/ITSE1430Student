@@ -505,12 +505,12 @@ namespace PizzaCreator
                     }
                 }
             }
-            Console.WriteLine($"{cheese} cheese     ${cheesePrice}");
-            Console.WriteLine($"{sauce} sauce       ${saucePrice}");
+            Console.WriteLine($"{cheese} cheese   ${cheesePrice}");
+            Console.WriteLine($"{sauce} sauce   ${saucePrice}");
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Total               ${totalPrice}");
 
-            Console.WriteLine("Press enter to continue");
+            Console.WriteLine("\nPress enter to continue");
             Console.ReadLine();
             return;
         }
