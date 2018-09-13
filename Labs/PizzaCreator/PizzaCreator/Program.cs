@@ -56,6 +56,7 @@ namespace PizzaCreator
             GetPizzaSauce();
             GetPizzaCheese();
             GetPizzaDelivery();
+            DisplayOrder();
             return;
         }
 
@@ -76,21 +77,21 @@ namespace PizzaCreator
                         {
                             totalPrice += 5.00m;
                             sizePrice = 5.00m;
-                            pizzaSize = "Small";
+                            pizzaSize = "Small pizza";
                             return true;
                         }
                     case '2':
                         {
                             totalPrice += 6.25m;
                             sizePrice = 6.25m;
-                            pizzaSize = "Medium";
+                            pizzaSize = "Medium pizza";
                             return true;
                         }
                     case '3':
                         {
                             totalPrice += 8.75m;
                             sizePrice = 8.75m;
-                            pizzaSize = "Large";
+                            pizzaSize = "Large pizza";
                             return true;
                         }
                     default: Console.WriteLine("Please enter a Value. between 1-3"); break;
@@ -377,7 +378,7 @@ namespace PizzaCreator
                 {
                     case '1':
                         {
-                            sauce = "Traditional";
+                            sauce = "Traditional sauce";
                             saucePrice = 0.00m;
                             return true;
                         }
@@ -385,14 +386,14 @@ namespace PizzaCreator
                         {
                             totalPrice += 1.00m;
                             saucePrice = 1.00m;
-                            sauce = "Garlic";
+                            sauce = "Garlic sauce";
                             return true;
                         }
                     case '3':
                         {
                             totalPrice += 1.00m;
                             saucePrice = 1.00m;
-                            sauce = "Oregano";
+                            sauce = "Oregano sauce";
                             return true;
                         }
                     default: Console.WriteLine("Please enter a Value. between 1-3"); break;
@@ -414,7 +415,7 @@ namespace PizzaCreator
                 {
                     case '1':
                         {
-                            cheese = "Regular";
+                            cheese = "Regular cheese";
                             cheesePrice = 0.00m;
                             return true;
                         }
@@ -422,7 +423,7 @@ namespace PizzaCreator
                         {
                             totalPrice += 1.25m;
                             cheesePrice = 1.25m;
-                            cheese = "Extra";
+                            cheese = "Extra Cheese";
                             return true;
                         }
                     default: Console.WriteLine("Please enter a Value. between 1 and 2"); break;
@@ -461,13 +462,60 @@ namespace PizzaCreator
 
         private static void ModifyOrder()
         {
-            Console.Clear();
-            Console.WriteLine("Modify Order");
             if (String.IsNullOrEmpty(pizzaSize))
             {
                 Console.WriteLine("You have not made an order to modify yet.\nPress enter to continue");
                 Console.ReadLine();
                 return;
+            }
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("What would all you like to change");
+                Console.WriteLine("1) Pizza Size");
+                Console.WriteLine("2) Meats");
+                Console.WriteLine("3) Vegtables");
+                Console.WriteLine("4) Pizza Sauce");
+                Console.WriteLine("5) Amount of Cheese");
+                Console.WriteLine("6) Type of delivery");
+                Console.WriteLine("7) Done Modifying");
+
+                string input = Console.ReadLine();
+                switch (input[0])
+                {
+                    case '1':
+                        {
+                            GetPizzaSize();
+                            DisplayOrder();
+                        } break;
+                    case '2':
+                        {
+                            GetPizzaMeats();
+                            DisplayOrder();
+                        } break;
+                    case '3':
+                        {
+                            GetPizzaVeggies();
+                            DisplayOrder();
+                        } break;
+                    case '4':
+                        {
+                            GetPizzaSauce();
+                            DisplayOrder();
+                        } break;
+                    case '5':
+                        {
+                            GetPizzaCheese();
+                            DisplayOrder();
+                        } break;
+                    case '6':
+                        {
+                            GetPizzaDelivery();
+                            DisplayOrder();
+                        } break;
+                    case '7': return;
+                    default: Console.WriteLine("Please enter a Value. between 1 and 7"); break;
+                }
             }
         }
 
@@ -481,34 +529,35 @@ namespace PizzaCreator
                 return;
             }
             Console.WriteLine("Your Order is:");
-            Console.WriteLine($"{pizzaSize}         ${sizePrice}");
-            Console.WriteLine($"{delivery}          ${deliveryPrice}");
+            Console.WriteLine("-------------------------");
+            Console.WriteLine("{0,-20}${1}|", pizzaSize, sizePrice);
+            Console.WriteLine("{0,-20}${1}|", delivery , deliveryPrice);
             if (!String.IsNullOrEmpty(meats[0]))
             {
-                Console.WriteLine("Meats - $0.75 for each one");
+                Console.WriteLine("Meats");
                 foreach (string meat in meats)
                 {
                     if (!String.IsNullOrEmpty(meat))
                     {
-                        Console.WriteLine($"   {meat}");
+                        Console.WriteLine("  -{0,-17}$0.75|", meat);
                     }
                 }
             }
             if (!String.IsNullOrEmpty(vegtables[0]))
             {
-                Console.WriteLine("Vegtables - $0.50 for each one");
+                Console.WriteLine("Vegtables");
                 foreach (string veggie in vegtables)
                 {
                     if (!String.IsNullOrEmpty(veggie))
                     {
-                        Console.WriteLine($"   {veggie}");
+                        Console.WriteLine("  -{0,-17}$0.50|", veggie);
                     }
                 }
             }
-            Console.WriteLine($"{cheese} cheese   ${cheesePrice}");
-            Console.WriteLine($"{sauce} sauce   ${saucePrice}");
-            Console.WriteLine("------------------------------------------");
-            Console.WriteLine($"Total               ${totalPrice}");
+            Console.WriteLine("{0,-20}${1}|", cheese , cheesePrice);
+            Console.WriteLine("{0,-20}${1}|", sauce, saucePrice);
+            Console.WriteLine("-------------------------|");
+            Console.WriteLine($"Total               ${totalPrice}|");
 
             Console.WriteLine("\nPress enter to continue");
             Console.ReadLine();
