@@ -140,17 +140,18 @@ namespace Section1
 
             //approach 2
             var str2 = value as string; //does the approach 1 check automatically. if false returns null
-            if (str2 != null)
-                Console.WriteLine(str2);
+            if (str2 != null)           //as operator is a cleaner form of type casting
+                Console.WriteLine(str2);//run-time safe
             else
                 Console.WriteLine(value.ToString());
-
+           
             //approach 3
             var str3 = value as string;
             Console.WriteLine((str3 != null) ? str3.ToString() : value.ToString());
 
             //approach 4
             //null coalescing
+            //returns the first non-null expression
             var str4 = value as string;
             Console.WriteLine((str4 ?? value).ToString());
 
@@ -165,6 +166,7 @@ namespace Section1
 
             //approach 6** best practices now 
             //null conditional
+            //if expression isnt null it executess the functon
             var str6 = value as string;
             Console.WriteLine(str6?.ToString());
 
