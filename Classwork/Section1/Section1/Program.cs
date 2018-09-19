@@ -34,7 +34,7 @@ namespace Section1
             //for(int i =0; i < names.Length; ++i)
             foreach(string name in names)
             {
-                //read only - not allowed
+                //read only
                 //name = "";
                 string str = name;
                 str =  "";
