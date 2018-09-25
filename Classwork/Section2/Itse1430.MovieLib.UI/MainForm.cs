@@ -21,6 +21,7 @@ namespace Itse1430.MovieLib.UI
         {
             if (MessageBox.Show("Are you sure you want to exit?", "Close", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
+
             Close();
         }
 
@@ -28,6 +29,16 @@ namespace Itse1430.MovieLib.UI
         {
             //aboutToolStripMenuItem
             MessageBox.Show(this,"Sorry", "Help", MessageBoxButtons.OK ,MessageBoxIcon.Exclamation);
+        }
+
+        private void OnMovieAdd( object sender, EventArgs e )
+        {
+            var form = new MovieForm();
+
+            if (form.ShowDialog(this) == DialogResult.Cancel)//'this' makes the main window the parent of the new form
+                return;
+
+            MessageBox.Show("Adding movie");
         }
     }
 }
