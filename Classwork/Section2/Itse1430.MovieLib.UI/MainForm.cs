@@ -38,7 +38,11 @@ namespace Itse1430.MovieLib.UI
             if (form.ShowDialog(this) == DialogResult.Cancel)//'this' makes the main window the parent of the new form
                 return;
 
-            MessageBox.Show("Adding movie");
+            //MessageBox.Show("Adding movie");
+            Movie = form.Movie;
+            //Movie.SetName("");
         }
+
+        private Movie Movie;
     }
 }
