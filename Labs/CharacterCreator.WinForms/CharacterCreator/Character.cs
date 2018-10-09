@@ -81,5 +81,18 @@ namespace CharacterCreator
                _charisma = value;
             }
         }
+
+        private int _wisdom;
+        public int Wisdom
+        {
+            get { return _wisdom; }
+            set
+            {
+                if (value < 0 || value > 100)
+                    return;
+
+                _wisdom = value;
+            }
+        }
     }
 }

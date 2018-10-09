@@ -37,6 +37,7 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._miHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this._listMovies = new System.Windows.Forms.ListBox();
             this._mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             this.helpToolStripMenuItem});
             this._mainMenu.Location = new System.Drawing.Point(0, 0);
             this._mainMenu.Name = "_mainMenu";
-            this._mainMenu.Size = new System.Drawing.Size(980, 24);
+            this._mainMenu.Size = new System.Drawing.Size(402, 24);
             this._mainMenu.TabIndex = 0;
             this._mainMenu.Text = "menuStrip1";
             // 
@@ -63,7 +64,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -90,6 +91,7 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.OnMovieEdit);
             // 
             // deleteToolStripMenuItem
             // 
@@ -97,6 +99,7 @@
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.OnMovieDelete);
             // 
             // helpToolStripMenuItem
             // 
@@ -114,11 +117,24 @@
             this._miHelpAbout.Text = "About";
             this._miHelpAbout.Click += new System.EventHandler(this.OnHelpAbout);
             // 
+            // _listMovies
+            // 
+            this._listMovies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._listMovies.FormattingEnabled = true;
+            this._listMovies.Location = new System.Drawing.Point(0, 24);
+            this._listMovies.Name = "_listMovies";
+            this._listMovies.Size = new System.Drawing.Size(402, 510);
+            this._listMovies.TabIndex = 1;
+            this._listMovies.UseTabStops = false;
+            this._listMovies.DoubleClick += new System.EventHandler(this.OnMovieDoubleCLick);
+            this._listMovies.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnListKeyUp);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 576);
+            this.ClientSize = new System.Drawing.Size(402, 534);
+            this.Controls.Add(this._listMovies);
             this.Controls.Add(this._mainMenu);
             this.MainMenuStrip = this._mainMenu;
             this.Name = "MainForm";
@@ -142,6 +158,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _miHelpAbout;
+        private System.Windows.Forms.ListBox _listMovies;
     }
 }
 

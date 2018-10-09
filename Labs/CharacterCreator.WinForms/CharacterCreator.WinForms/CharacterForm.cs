@@ -44,6 +44,8 @@ namespace CharacterCreator.WinForms
             character.Agility = DecimalToInt(_nudIntelligence.Value);
             character.Constitution = DecimalToInt(_nudConstitution.Value);
             character.Charisma = DecimalToInt(_nudCharisma.Value);
+            character.Wisdom = DecimalToInt(_nudWisdom.Value);
+
 
             character.Description = _txtDescription.Text;
 
@@ -72,6 +74,7 @@ namespace CharacterCreator.WinForms
                 _nudAgility.Value = Character.Agility;
                 _nudConstitution.Value = Character.Constitution;
                 _nudCharisma.Value = Character.Charisma;
+                _nudWisdom.Value = Character.Wisdom;
                 _txtDescription.Text = Character.Description;
             };
         }

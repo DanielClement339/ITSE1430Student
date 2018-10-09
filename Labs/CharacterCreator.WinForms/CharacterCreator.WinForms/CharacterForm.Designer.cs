@@ -49,11 +49,14 @@
             this._txtDescription = new System.Windows.Forms.TextBox();
             this._btnSave = new System.Windows.Forms.Button();
             this._btnCancel = new System.Windows.Forms.Button();
+            this._nudWisdom = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this._nudStrength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._nudIntelligence)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._nudConstitution)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._nudAgility)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._nudCharisma)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._nudWisdom)).BeginInit();
             this.SuspendLayout();
             // 
             // _lbName
@@ -83,6 +86,7 @@
             // 
             // _cbProfession
             // 
+            this._cbProfession.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cbProfession.FormattingEnabled = true;
             this._cbProfession.Location = new System.Drawing.Point(77, 38);
             this._cbProfession.Name = "_cbProfession";
@@ -100,6 +104,7 @@
             // 
             // _cbRace
             // 
+            this._cbRace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._cbRace.FormattingEnabled = true;
             this._cbRace.Location = new System.Drawing.Point(77, 68);
             this._cbRace.Name = "_cbRace";
@@ -282,12 +287,40 @@
             this._btnCancel.UseVisualStyleBackColor = true;
             this._btnCancel.Click += new System.EventHandler(this.OnCancel);
             // 
+            // _nudWisdom
+            // 
+            this._nudWisdom.Location = new System.Drawing.Point(387, 162);
+            this._nudWisdom.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this._nudWisdom.Name = "_nudWisdom";
+            this._nudWisdom.Size = new System.Drawing.Size(50, 20);
+            this._nudWisdom.TabIndex = 23;
+            this._nudWisdom.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(332, 162);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(45, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Wisdom";
+            // 
             // CharacterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 491);
             this.ControlBox = false;
+            this.Controls.Add(this._nudWisdom);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this._btnCancel);
             this.Controls.Add(this._btnSave);
             this.Controls.Add(this._txtDescription);
@@ -310,6 +343,8 @@
             this.Controls.Add(this._txtName);
             this.Controls.Add(this._lbName);
             this.Name = "CharacterForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.CharacterForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this._nudStrength)).EndInit();
@@ -317,6 +352,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._nudConstitution)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._nudAgility)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._nudCharisma)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._nudWisdom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,5 +381,7 @@
         private System.Windows.Forms.TextBox _txtDescription;
         private System.Windows.Forms.Button _btnSave;
         private System.Windows.Forms.Button _btnCancel;
+        private System.Windows.Forms.NumericUpDown _nudWisdom;
+        private System.Windows.Forms.Label label10;
     }
 }

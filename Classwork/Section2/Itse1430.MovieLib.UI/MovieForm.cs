@@ -16,7 +16,7 @@ namespace Itse1430.MovieLib.UI
         {
             InitializeComponent();
         }
-        public Movie Movie;
+        public Movie Movie { get; set; }
 
         private void OnCancel( object sender, EventArgs e )
         {
@@ -50,6 +50,8 @@ namespace Itse1430.MovieLib.UI
             if(movie.RunLength < 0)
                 return;
 
+            movie.IsOwned = _chkOwned.Checked;  //checked == true
+
             Movie = movie;
 
             DialogResult = DialogResult.OK;
@@ -65,6 +67,18 @@ namespace Itse1430.MovieLib.UI
                 return value;
 
             return -1;
+        }
+
+        private void MovieForm_Load( object sender, EventArgs e )
+        {
+            if(Movie != null)
+            {
+                _txtName.Text = Movie.Name;
+                _txtDescription.Text = Movie.Description;
+                _txtReleaseYear.Text = Movie.ReleaseYear.ToString();
+                _txtRunLength.Text = Movie.RunLength.ToString();
+                _chkOwned.Checked = Movie.IsOwned;
+            };
         }
     }
 }
