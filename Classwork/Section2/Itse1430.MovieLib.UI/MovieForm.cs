@@ -26,39 +26,25 @@ namespace Itse1430.MovieLib.UI
 
         private void OnSave( object sender, EventArgs e )
         {
-            var movie = new Movie();// movie class from the movie.cs file
-            //var movie2 = new Movie();
-            //var name = movie2.GetName();    
-
-            //name is required
-            movie.Name = _txtName.Text; // field 
-           // movie.SetName(_txtName.Text); //method
-            if (String.IsNullOrEmpty(movie.Name))
+            if (!ValidateChildren())
                 return;
 
-            //description
-            movie.Description = _txtDescription.Text;   //property
-            //movie.SetDescription(_txtDescription.Text); //method
-
-            //release year is numeric if set
-            movie.ReleaseYear = GetInt32(_txtReleaseYear);
-            if(movie.ReleaseYear < 0)
-                return;
-
-            //run lenght
-            movie.RunLength = GetInt32(_txtReleaseYear);
-            if(movie.RunLength < 0)
-                return;
-
-            movie.IsOwned = _chkOwned.Checked;  //checked == true
+            //initializer syntax
+            var movie = new Movie()
+            {
+                Name = _txtName.Text,
+                Description = _txtDescription.Text,
+                ReleaseYear = GetInt32(_txtReleaseYear),
+                RunLength = GetInt32(_txtReleaseYear),
+                IsOwned = _chkOwned.Checked,
+            };
 
             Movie = movie;
-
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private int GetInt32(TextBox textBox)
+        private int GetInt32( TextBox textBox )
         {
             if (String.IsNullOrEmpty(textBox.Text))
                 return 0;
@@ -71,7 +57,7 @@ namespace Itse1430.MovieLib.UI
 
         private void MovieForm_Load( object sender, EventArgs e )
         {
-            if(Movie != null)
+            if (Movie != null)
             {
                 _txtName.Text = Movie.Name;
                 _txtDescription.Text = Movie.Description;
@@ -79,6 +65,38 @@ namespace Itse1430.MovieLib.UI
                 _txtRunLength.Text = Movie.RunLength.ToString();
                 _chkOwned.Checked = Movie.IsOwned;
             };
+        }
+
+        private void OnValidateName( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            if (String.IsNullOrEmpty(control.Text))
+            {
+                //controll error
+                _errors.SetError(control, "Name is required");
+                e.Cancel = true;
+            };
+
+            _errors.SetError(control, "");
+        }
+
+        private void OnValidateReleaseYear( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            var result = GetInt32(control);
+
+            if (result < 1900)
+                e.Cancel = true;
+        }
+
+        private void OnValidateRunLength( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            var result = GetInt32(control);
+
+            if (result < 0)
+                e.Cancel = true;
         }
     }
 }
