@@ -8,116 +8,57 @@ using Itse1430.MovieLib;
 namespace Itse1430MovieLib
 {
     //responsible for managing a collection movie objects
-    public class MovieDatabase
+    public abstract class MovieDatabase
     {
-        public MovieDatabase() : this(true)
-        {
-
-        }
-
-        private static Movie[] GetSeedMovies( bool seed )
-        {
-            if (!seed)
-                return new Movie[0];
-
-            return new [] {
-                new Movie()
-                {
-                    Name = "Dunkirk",
-                    RunLength = 123,
-                    ReleaseYear = 2016,
-                },
-
-                new Movie()
-                {
-                    Name = "Star Wars: A New Hope",
-                    RunLength = 125,
-                    ReleaseYear = 1977,
-                },
-            };
-        }
-
-        public MovieDatabase( bool seed ) : this(GetSeedMovies(seed))
-        {
-            //if(seed)
-            //{
-            //    var movie = new Movie();
-            //    movie.Name = "Dunkirk";
-            //    movie.RunLength = 123;
-            //    movie.ReleaseYear = 2016;
-            //    Add(movie);
-
-            //    movie = new Movie();
-            //    movie.Name = "Star Wars: A New Hope";
-            //    movie.RunLength = 125;
-            //    movie.ReleaseYear = 1977;
-            //    Add(movie);
-            //}
-        }
-
-        public MovieDatabase( Movie[] movies )
-        {
-            _items.AddRange(movies);
-        }
-
         public void Add( Movie movie )
         {
-            _items.Add(movie);
-            //var index = FindNextFreeIndex();
-            //if (index >= 0)
-            //    _movies[index] = movie;
+            //TODO: Vakudate
+            if (movie == null)
+                return;
 
+            AddCore(movie);
         }
 
+        protected abstract void AddCore( Movie movie );
+
         //private Movie[] _movies = new Movie[100];
-        private List<Movie> _items = new List<Movie>();
 
         public Movie[] GetAll()
         {
-            var count = _items.Count;
-
-            var temp = new Movie[count];
-
-            var index = 0;
-            foreach (var movie in _items)
-            {
-                temp[index++] = movie;
-            };
-
-            return temp;
+            return GetAllCore();
         }
+
+        protected abstract Movie[] GetAllCore();
 
         public void Remove( string name )
         {
-            var movie = FindMovie(name);
-            if (movie != null)
-                _items.Remove(movie);
+            //TODO: Validate
+            if (String.IsNullOrEmpty(name))
+                return;
+
+            RemoveCore(name);
         }
+
+        protected abstract void RemoveCore( string name );
 
         public void Edit( string name, Movie movie )
         {
+            //TODO: Validate
+            if (String.IsNullOrEmpty(name))
+                return;
+            if (movie == null)
+                return;
+
             //find movie by name
-            Remove(name);
+            var existing = FindByName(name);
+            if (existing == null)
+                return;
 
-            //replace it
-            Add(movie);
+            EditCore(existing, movie);
         }
 
-        private Movie FindMovie( string name )
-        {
-            //var pairs = new Dictionary<string, Movie>();
+        protected abstract Movie FindByName( string name );
+        protected abstract void EditCore( Movie oldMovie, Movie newMovie );
 
-
-
-            //for (var index = 0; index < _movies.Length; ++index)
-            foreach (var movie in _items)
-            {
-                if (String.Compare(name, movie.Name, true) == 0)
-                {
-                    return movie;
-                };
-            };
-            return null;
-        }
     }
 }

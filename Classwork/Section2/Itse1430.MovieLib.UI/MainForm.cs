@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Itse1430MovieLib;
+using Itse1430MovieLib.Memory;
 
 namespace Itse1430.MovieLib.UI
 {
@@ -26,6 +27,9 @@ namespace Itse1430.MovieLib.UI
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad(e);
+
+            //Seed database
+            SeedDatabase.Seed(_database);
 
             _listMovies.DisplayMember = "Name";
             RefreshMovies();
@@ -64,7 +68,7 @@ namespace Itse1430.MovieLib.UI
             RefreshMovies();
         }
 
-        private MovieDatabase _database = new MovieDatabase();
+        private MovieDatabase _database = new MemoryMovieDatabase();
 
 
         private void RefreshMovies()
