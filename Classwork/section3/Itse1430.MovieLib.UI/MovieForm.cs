@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 
 namespace Itse1430.MovieLib.UI
@@ -30,11 +31,6 @@ namespace Itse1430.MovieLib.UI
             ValidateChildren();
         }
 
-        private void _btnSave_Click( object sender, EventArgs e )
-        {
-            throw new NotImplementedException();
-        }
-
         #region Event Handlers
 
         private void OnCancel( object sender, EventArgs e )
@@ -48,42 +44,38 @@ namespace Itse1430.MovieLib.UI
             if (!ValidateChildren())
                 return;
 
-            var movie = new Movie();
-                        
-            movie.Name = _txtName.Text;
-            movie.Description = _txtDescription.Text;            
-            movie.ReleaseYear = GetInt32(_txtReleaseYear);            
-            movie.RunLength = GetInt32(_txtRunLength);            
-            movie.IsOwned = _chkOwned.Checked;
+            //var movie = new Movie();                        
+            //movie.Name = _txtName.Text;
+            //movie.Description = _txtDescription.Text;            
+            //movie.ReleaseYear = GetInt32(_txtReleaseYear);            
+            //movie.RunLength = GetInt32(_txtRunLength);            
+            //movie.IsOwned = _chkOwned.Checked;
+
+            //Initializer syntax
+            var movie = new Movie() {
+                Name = _txtName.Text,
+                Description = _txtDescription.Text,
+                ReleaseYear = GetInt32(_txtReleaseYear),
+                RunLength = GetInt32(_txtRunLength),
+                IsOwned = _chkOwned.Checked,
+            };
+
+            //Validate the movie
+            //Validator.TryValidateObject()
+            var results = ObjectValidator.Validate(movie);
+            foreach (var result in results)
+            //if (results.Count > 0)
+            {
+                //var firstMessage = results[0];                
+                MessageBox.Show(this, result.ErrorMessage, "Validation Failed",
+                                MessageBoxButtons.OK);
+                return;
+            };
 
             Movie = movie;
             DialogResult = DialogResult.OK;
             Close();
-
-            //Using properties so don't need the method calls
-            //movie.SetName(_txtName.Text);
-            //movie.SetDescription(_txtDescription.Text);
-            //movie.SetReleaseYear(GetInt32(_txtReleaseYear));
-            //if (movie.GetReleaseYear() < 0)
-            //movie.SetRunLength(GetInt32(_txtRunLength));
-            //if (movie.GetRunLength() < 0)
         }
-
-        #endregion
-
-        #region Private Members
-
-        private int GetInt32 ( TextBox textBox )
-        {
-            if (String.IsNullOrEmpty(textBox.Text))
-                return -1;
-
-            if (Int32.TryParse(textBox.Text, out var value))
-                return value;
-
-            return -1;
-        }
-        #endregion
 
         private void OnValidateName( object sender, System.ComponentModel.CancelEventArgs e )
         {
@@ -121,5 +113,20 @@ namespace Itse1430.MovieLib.UI
             } else
                 _errors.SetError(control, "");
         }
+        #endregion
+
+        #region Private Members
+
+        private int GetInt32( TextBox textBox )
+        {
+            if (String.IsNullOrEmpty(textBox.Text))
+                return -1;
+
+            if (Int32.TryParse(textBox.Text, out var value))
+                return value;
+
+            return -1;
+        }
+        #endregion        
     }
 }

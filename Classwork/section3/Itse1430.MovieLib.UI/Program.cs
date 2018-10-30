@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Itse1430MovieLib.UI
+namespace Itse1430.MovieLib.UI
 {
     static class Program
     {
@@ -16,7 +13,7 @@ namespace Itse1430MovieLib.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }
