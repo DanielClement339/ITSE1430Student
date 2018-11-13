@@ -13,7 +13,7 @@ namespace Itse1430.MovieLib
         /// <summary>Validates an object.</summary>
         /// <param name="value">The object to validate.</param>
         /// <returns>The list of validation results.</returns>
-        public static IEnumerable<ValidationResult> TryValidate( IValidatableObject value )
+        public static IEnumerable<ValidationResult> TryValidate ( IValidatableObject value )
         {
             var results = new List<ValidationResult>();
 

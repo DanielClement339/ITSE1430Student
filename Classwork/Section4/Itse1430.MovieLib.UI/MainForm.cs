@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
 using Itse1430.MovieLib.Memory;
@@ -29,15 +30,17 @@ namespace Itse1430.MovieLib.UI
         {
             base.OnLoad(e);
 
-            
-
+            var connString = ConfigurationManager
+                                .ConnectionStrings["Database"]
+                                .ConnectionString;
+            _database = new SqlMovieDatabase(connString);
             //Seed database
             //var seed = new SeedDatabase();
             //SeedDatabase.Seed(_database);
 
             //Use the extension method to seed the database
             //Compiler generates this: MovieDatabaseExtensions.Seed(_database);
-           // _database.Seed();
+            //_database.Seed();
 
             _listMovies.DisplayMember = "Name";
             RefreshMovies();
@@ -70,16 +73,9 @@ namespace Itse1430.MovieLib.UI
             try
             {
                 _database.Add(form.Movie);
-            //} catch (ArgumentException ex)
-            //{
-            //    MessageBox.Show("Programmer messed up", "Error",
-            //                MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            //    //Throw a different exception
-            //    throw new InvalidOperationException("Programmer messed up");
             } catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error",
+                MessageBox.Show(ex.Message, "Error", 
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Log failure
@@ -95,7 +91,7 @@ namespace Itse1430.MovieLib.UI
                 
         private void OnMovieDelete( object sender, EventArgs e )
         {
-            DeleteMovie();
+            DeleteMovie();            
         }
 
         private void OnMovieEdit( object sender, EventArgs e )
@@ -128,13 +124,12 @@ namespace Itse1430.MovieLib.UI
 
             //Remove from database and refresh
             try
-            {
+            { 
                 _database.Remove(item.Name);
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             };
-            
             RefreshMovies();
         }
 
@@ -153,13 +148,12 @@ namespace Itse1430.MovieLib.UI
 
             //Update database and refresh
             try
-            {
+            { 
                 _database.Edit(item.Name, form.Movie);
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             };
-            
             RefreshMovies();
         }
 
@@ -173,9 +167,6 @@ namespace Itse1430.MovieLib.UI
 
             _listMovies.Items.Clear();
             
-            //foreach (var movie in movies)
-            //    _listMovies.Items.Add(movie);
-
             //Use ToArray extension method from LINQ
             _listMovies.Items.AddRange(movies.ToArray());
         }
@@ -185,7 +176,7 @@ namespace Itse1430.MovieLib.UI
             return _listMovies.SelectedItem as Movie;
         }
 
-        private IMovieDatabase _database = new SqlMovieDatabase();
+        private IMovieDatabase _database;// = new SqlMovieDatabase();
 
         #endregion        
     }

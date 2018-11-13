@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -93,7 +94,7 @@
       <Name>Itse1430.MovieLib.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\Itse1430.MovieLib.Sql\Itse1430.MovieLib.Sql.csproj">
-      <Project>{A8B4C1F1-51A2-4504-9AEC-CA42D9EA5534}</Project>
+      <Project>{6BB9AB6D-00C1-4D79-A5B4-2FACDDB5475B}</Project>
       <Name>Itse1430.MovieLib.Sql</Name>
     </ProjectReference>
     <ProjectReference Include="..\Itse1430.MovieLib\Itse1430.MovieLib.csproj">

@@ -12,12 +12,12 @@ namespace Itse1430.MovieLib.Memory
     {
         /// <summary>Adds a movie to the database.</summary>
         /// <param name="movie">The movie to add.</param>
-        //protected override void AddCore( Movie movie ) => _items.Add(movie);
         protected override void AddCore( Movie movie )
         {
             //throw new Exception("Failed");
             _items.Add(movie);
         }
+        //Using an expression body for single statement methods
         //{
         //    _items.Add(movie);
         //    //var index = FindNextFreeIndex();
@@ -30,14 +30,12 @@ namespace Itse1430.MovieLib.Memory
         protected override IEnumerable<Movie> GetAllCore()
         {
             //var i = _items.ToArray();
-
             //return _items;
 
-            //using SQL like syntax
+            //Use LINQ to clone movies
             return from item in _items
-                //where
-                select new Movie()
-                {
+                   //where 
+                   select new Movie() {
                     Name = item.Name,
                     Description = item.Description,
                     ReleaseYear = item.ReleaseYear,
@@ -45,10 +43,7 @@ namespace Itse1430.MovieLib.Memory
                     IsOwned = item.IsOwned
                 };
 
-
-            //Use LINQ to clone movies
-            //return _items.Select(item => new Movie()
-            //{
+            //return _items.Select(item => new Movie() {
             //    Name = item.Name,
             //    Description = item.Description,
             //    ReleaseYear = item.ReleaseYear,
@@ -74,8 +69,20 @@ namespace Itse1430.MovieLib.Memory
             //    temp[index++] = movie;
             //};
 
-            //return temp;
+            //return temp;            
         }
+
+        //TODO: Temporary method to clone a movie
+        //private Movie Clone( Movie item )
+        //{
+        //    return new Movie() {
+        //        Name = item.Name,
+        //        Description = item.Description,
+        //        ReleaseYear = item.ReleaseYear,
+        //        RunLength = item.RunLength,
+        //        IsOwned = item.IsOwned
+        //    };
+        //}
 
         /// <summary>Edits an existing movie.</summary>
         /// <param name="name">The movie to edit.</param>
@@ -96,7 +103,6 @@ namespace Itse1430.MovieLib.Memory
         {
             //Example with multiple type parameters
             //var pairs = new Dictionary<string, Movie>();
-
             //for (var index = 0; index < _movies.Length; ++index)
             //foreach (var movie in _items)
             //{
@@ -104,17 +110,16 @@ namespace Itse1430.MovieLib.Memory
             //    if (String.Compare(name, movie.Name, true) == 0)
             //        return movie;
             //};
-
             //Use extension methods to get first item
             //return _items.Where(IsName).FirstOrDefault();
             //return _items.FirstOrDefault(m => String.Compare(name, m.Name, true) == 0);
+
             return (from m in _items
-                   where String.Compare(name, m.Name, true) == 0
-                   select m).FirstOrDefault();
+                    where String.Compare(name, m.Name, true) == 0
+                    select m).FirstOrDefault();
 
             //return null;
         }
-
 
         /// <summary>Removes a movie.</summary>
         /// <param name="name">The movie to remove.</param>
