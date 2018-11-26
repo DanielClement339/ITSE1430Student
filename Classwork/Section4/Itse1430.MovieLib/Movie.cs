@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace Itse1430.MovieLib
 {
+    [Description("A movie.")]
     public class Movie : IValidatableObject
     {
         //Property to back the name field
+        [Required(AllowEmptyStrings = false)]
+        //[Required]
         public string Name
         {
             //Using expression body
@@ -33,9 +37,13 @@ namespace Itse1430.MovieLib
         private string _description;
 
         //Using auto property with field initializer
+        [Range(1900, 2100, ErrorMessage = "Release Year must be >= 1900")]
+        [Required]
+        //[RangeAttribute(1900, 2100), RequiredAttribute()]
         public int ReleaseYear { get; set; } = 1900;
-        
+
         //Using auto property
+        [Range(0, Int32.MaxValue, ErrorMessage = "Run length must be >= 0.")]
         public int RunLength { get; set; }
         
         //Using mixed accessibility
@@ -57,17 +65,18 @@ namespace Itse1430.MovieLib
             //Using iterator syntax instead of List<T>
             //var results = new List<ValidationResult>();
 
-            if (String.IsNullOrEmpty(Name))
-                yield return new ValidationResult("Name is required.",
-                                new[] { nameof(Name) });
+            //if (String.IsNullOrEmpty(Name))
+            //    yield return new ValidationResult("Name is required.",
+            //                    new[] { nameof(Name) });
 
-            if (ReleaseYear < 1900)
-                yield return new ValidationResult("Release year must be >= 1900",
-                                new[] { nameof(ReleaseYear) });
+            //if (ReleaseYear < 1900)
+            //    yield return new ValidationResult("Release year must be >= 1900",
+            //                    new[] { nameof(ReleaseYear) });
 
-            if (RunLength < 0)
-                yield return new ValidationResult("Run length must be >= 0",
-                                new[] { nameof(RunLength) });
+            //if (RunLength < 0)
+            //    yield return new ValidationResult("Run length must be >= 0",
+            //                    new[] { nameof(RunLength) });
+            yield return null;
         }
 
 

@@ -30,26 +30,6 @@ namespace Itse1430.MovieLib.Sql
 
         protected override void AddCore( Movie movie )
         {
-            //var conn = new SqlConnection(_connectionString);
-
-            #region Approaches to adding parameters
-
-            //Approach 1
-            //var param = new SqlParameter("@title", System.Data.SqlDbType.VarChar);
-            //param.Value = movie.Name;
-            //cmd.Parameters.Add(param);
-
-            //Approach 2
-            //var param = cmd.Parameters.Add("@title", System.Data.SqlDbType.VarChar);
-            //param.Value = movie.Name;
-
-            //Approach 3            
-            //cmd.Parameters.AddWithValue("@title", movie.Name);
-
-            #endregion
-
-            //Run command
-            //try
             using (var conn = CreateConnection())
             {
                 var cmd = new SqlCommand("AddMovie", conn);
@@ -64,17 +44,12 @@ namespace Itse1430.MovieLib.Sql
                 var result = cmd.ExecuteScalar();
                 var id = Convert.ToInt32(result);
             };
-            /*} finally
-            {
-                conn.Close();
-            };*/
         }
 
         protected override void EditCore( Movie oldMovie, Movie newMovie )
         {
             using (var conn = CreateConnection())
             {
-                //var cmd = new SqlCommand("AddMovie", conn);
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "UpdateMovie";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -93,22 +68,19 @@ namespace Itse1430.MovieLib.Sql
                 
         protected override Movie FindByName( string name )
         {
-            //uses a data reader
             using (var conn = CreateConnection())
             {
-                var cmd = new SqlCommand("UpdateMovie", conn);
+                var cmd = new SqlCommand("GetAllMovies", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 conn.Open();
                 using (var reader = cmd.ExecuteReader())
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         var movieName = reader.GetString(1);
                         if (String.Compare(movieName, name, true) != 0)
                             continue;
-
-                        //reader.GetOrdinal("Id");
 
                         return new SqlMovie() {
                             Id = reader.GetFieldValue<int>(0),
@@ -121,14 +93,14 @@ namespace Itse1430.MovieLib.Sql
                     };
                 };
             };
+
             return null;
         }
 
         protected override IEnumerable<Movie> GetAllCore()
         {
-            //uses a data set
             var ds = new DataSet();
-
+            
             using (var conn = CreateConnection())
             {
                 var da = new SqlDataAdapter();
@@ -139,19 +111,16 @@ namespace Itse1430.MovieLib.Sql
                 da.Fill(ds);
             };
 
-            //Read the Data
-            //if (ds.Tables.OfType<DataTable>().Any())
-            //   return Enumerable.Empty<Movie>();
-
+            //Must have at least one table
             var table = ds.Tables.OfType<DataTable>().FirstOrDefault();
-            if(table == null)
+            if (table == null)
                 return Enumerable.Empty<Movie>();
 
+            //Enumerate the rows
             var movies = new List<Movie>();
-            foreach(var row in table.Rows.OfType<DataRow>())
+            foreach (var row in table.Rows.OfType<DataRow>())
             {
-                var movie = new SqlMovie()
-                {
+                var movie = new SqlMovie() {
                     Id = Convert.ToInt32(row["Id"]),
                     Name = row.Field<string>("Title"),
                     Description = Convert.ToString(row[2]),
@@ -162,8 +131,6 @@ namespace Itse1430.MovieLib.Sql
                 movies.Add(movie);
             };
 
-
-            //throw new NotImplementedException();
             return movies;
         }
 
