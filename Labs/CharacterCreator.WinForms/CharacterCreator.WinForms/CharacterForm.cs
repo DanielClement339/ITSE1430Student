@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CharacterCreator.WinForms
@@ -19,44 +12,26 @@ namespace CharacterCreator.WinForms
 
         public Character Character { get; set; }
 
-        private void OnCancel(object sender, EventArgs e)
+        private void AddClasses()
         {
-            DialogResult = DialogResult.Cancel; // used to tell the parent form what was pressed
-            Close();
+            _cbProfession.Items.Add("Fighter");
+            _cbProfession.Items.Add("Hunter");
+            _cbProfession.Items.Add("Priest");
+            _cbProfession.Items.Add("Rouge");
+            _cbProfession.Items.Add("Wizard");
+            _cbProfession.Items.Add("Paladin");
         }
 
-
-
-        private void OnSave(object sender, EventArgs e)
+        private void AddRaces()
         {
-            var character = new Character();
-
-            character.Name = _txtName.Text;
-            if (String.IsNullOrEmpty(_txtName.Text))
-                return;
-
-            character.Profession = _cbProfession.SelectedItem.ToString();
-            character.Race = _cbRace.SelectedItem.ToString();
-
-            //attributes
-            character.Strength = DecimalToInt(_nudStrength.Value);
-            character.Intelligence = DecimalToInt(_nudIntelligence.Value);
-            character.Agility = DecimalToInt(_nudIntelligence.Value);
-            character.Constitution = DecimalToInt(_nudConstitution.Value);
-            character.Charisma = DecimalToInt(_nudCharisma.Value);
-            character.Wisdom = DecimalToInt(_nudWisdom.Value);
-
-
-            character.Description = _txtDescription.Text;
-
-            Character = character;
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-
-        private int DecimalToInt(decimal value)
-        {
-            return Convert.ToInt32(value);
+            _cbRace.Items.Add("Human");
+            _cbRace.Items.Add("Dwarf");
+            _cbRace.Items.Add("Gnome");
+            _cbRace.Items.Add("Elf");
+            _cbRace.Items.Add("Orc");
+            _cbRace.Items.Add("Undead");
+            _cbRace.Items.Add("Troll");
+            _cbRace.Items.Add("Goblin");
         }
 
         private void CharacterForm_Load(object sender, EventArgs e)
@@ -79,27 +54,41 @@ namespace CharacterCreator.WinForms
             };
         }
 
-        private void AddClasses()
+        private int DecimalToInt(decimal value)
         {
-            _cbProfession.Items.Add("Fighter");
-            _cbProfession.Items.Add("Hunter");
-            _cbProfession.Items.Add("Priest");
-            _cbProfession.Items.Add("Rouge");
-            _cbProfession.Items.Add("Wizard");
-            _cbProfession.Items.Add("Paladin");
+            return Convert.ToInt32(value);
         }
 
-        private void AddRaces()
+        private void OnCancel(object sender, EventArgs e)
         {
-            _cbRace.Items.Add("Human");
-            _cbRace.Items.Add("Dwarf");
-            _cbRace.Items.Add("Gnome");
-            _cbRace.Items.Add("Elf");
-            _cbRace.Items.Add("Orc");
-            _cbRace.Items.Add("Undead");
-            _cbRace.Items.Add("Troll");
-            _cbRace.Items.Add("Goblin");
+            DialogResult = DialogResult.Cancel; // used to tell the parent form what was pressed
+            Close();
+        }
 
+        private void OnSave(object sender, EventArgs e)
+        {
+            var character = new Character();
+
+            character.Name = _txtName.Text;
+            if (String.IsNullOrEmpty(_txtName.Text))
+                return;
+
+            character.Profession = _cbProfession.SelectedItem.ToString();
+            character.Race = _cbRace.SelectedItem.ToString();
+
+            //attributes
+            character.Strength = DecimalToInt(_nudStrength.Value);
+            character.Intelligence = DecimalToInt(_nudIntelligence.Value);
+            character.Agility = DecimalToInt(_nudIntelligence.Value);
+            character.Constitution = DecimalToInt(_nudConstitution.Value);
+            character.Charisma = DecimalToInt(_nudCharisma.Value);
+            character.Wisdom = DecimalToInt(_nudWisdom.Value);
+
+            character.Description = _txtDescription.Text;
+
+            Character = character;
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

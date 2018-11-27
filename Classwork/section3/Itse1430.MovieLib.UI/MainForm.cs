@@ -46,7 +46,7 @@ namespace Itse1430.MovieLib.UI
         {
             if (MessageBox.Show("Are you sure you want to exit?",
                         "Close", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;           
+                return;
 
             Close();
         }
@@ -148,6 +148,6 @@ namespace Itse1430.MovieLib.UI
 
         private IMovieDatabase _database = new MemoryMovieDatabase();
 
-        #endregion        
+        #endregion
     }
 }
