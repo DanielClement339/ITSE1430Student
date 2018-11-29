@@ -1,8 +1,11 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * Daniel Clement
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactManager.Memory
 {
@@ -18,7 +21,6 @@ namespace ContactManager.Memory
             //Replace it
             _items.Add(newContact);
         }
-       
 
         protected override Contact FindByName(string name)
         {

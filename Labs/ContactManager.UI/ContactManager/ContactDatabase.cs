@@ -1,8 +1,10 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * Daniel Clement
+ */
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactManager
 {
@@ -38,7 +40,6 @@ namespace ContactManager
 
         public void Remove(string name)
         {
-            //TODO: Validate
             if (String.IsNullOrEmpty(name))
                 return;
 
@@ -54,6 +55,5 @@ namespace ContactManager
         protected abstract void RemoveCore(string name);
 
         protected abstract IEnumerable<Contact> GetAllCore();
-
     }
 }
