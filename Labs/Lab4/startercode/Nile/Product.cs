@@ -1,12 +1,15 @@
 /*
+ * Daniel Clement
  * ITSE 1430
  */
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Nile
 {
     /// <summary>Represents a product.</summary>
-    public class Product
+    public class Product : IValidatableObject
     {
         /// <summary>Gets or sets the unique identifier.</summary>
         public int Id { get; set; }
@@ -35,6 +38,16 @@ namespace Nile
         public override string ToString()
         {
             return Name;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Id <= 0)
+                yield return new ValidationResult("ID must be greater than or equal to 0. ", new[] { nameof(Id) });
+            if(Price <= 0)
+                yield return new ValidationResult("Price must be greater than or equal to 0. ", new[] { nameof(Price) });
+            if(String.IsNullOrEmpty(Name))
+                yield return new ValidationResult("Name is required and cannot be empty. ", new[] { nameof(Name) });
         }
 
         #region Private Members

@@ -1,4 +1,5 @@
 /*
+ * Daniel Clement
  * ITSE 1430
  */
 using System;
@@ -70,6 +71,13 @@ namespace Nile.Windows
             };
 
             //TODO: Validate product
+            var results = ObjectValidator.TryValidate(Product);
+            foreach (var result in results)
+            {
+                MessageBox.Show(this, result.ErrorMessage, "Validation Failed",
+                                 MessageBoxButtons.OK);
+                return;
+            };
 
             Product = product;
             DialogResult = DialogResult.OK;

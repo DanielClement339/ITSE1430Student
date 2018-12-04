@@ -146,7 +146,7 @@ namespace Nile.Windows
             this._gridProducts.Size = new System.Drawing.Size(827, 354);
             this._gridProducts.TabIndex = 1;
             this._gridProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnEditRow);
-            this._gridProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownGrid);
+            this._gridProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             // 
             // nameDataGridViewTextBoxColumn
             // 

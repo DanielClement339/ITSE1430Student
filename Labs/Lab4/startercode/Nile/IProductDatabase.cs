@@ -1,4 +1,5 @@
 /*
+ * Daniel Clement
  * ITSE 1430
  */
 using System;
@@ -30,5 +31,7 @@ namespace Nile
         /// <param name="product">The product to update.</param>
         /// <returns>The updated product.</returns>
         Product Update ( Product product );
+
+        bool Existing(string name);
     }
 }

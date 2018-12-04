@@ -3,6 +3,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nile.Stores
 {
@@ -84,6 +85,17 @@ namespace Nile.Stores
             foreach (var product in _products)
             {
                 if (product.Id == id)
+                    return product;
+            };
+
+            return null;
+        }
+
+        protected override object FindProduct(string name)
+        {
+            foreach (var product in _products)
+            {
+                if (product.Name == name)
                     return product;
             };
 

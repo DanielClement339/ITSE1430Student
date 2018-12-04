@@ -73,6 +73,18 @@ namespace Nile.Stores
         protected abstract Product UpdateCore( Product existing, Product newItem );
 
         protected abstract Product AddCore( Product product );
+
+        public bool Existing(string name)
+        {
+            var product = FindProduct(name);
+            if (product == null)
+                return false;
+            else
+                return true;
+
+        }
+
+        protected abstract object FindProduct(string name);
         #endregion
     }
 }

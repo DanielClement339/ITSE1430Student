@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{93BD7A37-01A9-498D-8479-67BEF715EA20}</ProjectGuid>
+    <ProjectGuid>{9CB09E42-2A3D-4333-84EB-C4C04076ACCB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nile</RootNamespace>
-    <AssemblyName>Nile</AssemblyName>
+    <RootNamespace>EventPlanner</RootNamespace>
+    <AssemblyName>EventPlanner</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProductDatabase.cs" />
-    <Compile Include="ObjectValidator.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="Stores\ProductDatabase.cs" />
-    <Compile Include="Stores\MemoryProductDatabase.cs" />
+    <Compile Include="IEventDatabase.cs" />
+    <Compile Include="Memory\MemoryEventDatabase.cs" />
+    <Compile Include="EventCriteria.cs" />
+    <Compile Include="ScheduledEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Verify.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
